@@ -37,7 +37,7 @@ They may break builds or worse. You should consider deleting them:
 Now type `brew help` to familiar yourself with homebrew
 
 
-### ~~iTerm2~~ # no longer needed! the new Mac Terminal is brilliant.
+### ~~iTerm2~~ no longer needed! the new Mac Terminal is brilliant.
 
 ~~http://code.google.com/p/iterm2/~~
 
