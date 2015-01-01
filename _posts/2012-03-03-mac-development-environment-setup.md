@@ -23,13 +23,15 @@ Install:
 Result:
 
 ```
-
 Warning: The following *evil* dylibs exist in /usr/local/lib
-They may break builds or worse. You should consider deleting them:
-/usr/local/lib/libfuse.2.dylib
-/usr/local/lib/libfuse_ino64.2.dylib
-==> Installation successful!
 
+They may break builds or worse. You should consider deleting them:
+
+/usr/local/lib/libfuse.2.dylib
+
+/usr/local/lib/libfuse_ino64.2.dylib
+
+==> Installation successful!
 ```
 
 Now type `brew help` to familiar yourself with homebrew
