@@ -137,7 +137,5 @@ _g++: /usr/local/bin/ccache-g++.sh_
 brew install haskell-platform
 ```
 
-            
-## Note: the gcc command on Mac OSX is no longer a real gcc, it's just a gcc
-front end for clang, so even it mentions gcc version 4.2.1, it's actually clang-600,
-which has all the C++11 features you need supported.
+
+#### Note: the gcc command on Mac OSX is no longer a real gcc, it's just a gcc front end for clang, so even it mentions gcc version 4.2.1, it's actually clang-600, which has all the C++11 features you need supported.
