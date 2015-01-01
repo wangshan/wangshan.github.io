@@ -10,4 +10,60 @@ blogger_id: tag:blogger.com,1999:blog-6338160651537141164.post-61229520400389512
 blogger_orig_url: http://swang-ztransform.blogspot.com/2013/11/enable-file-sharing-with-guest-system.html
 ---
 
-For me the guest system is Arch Linux, so I mostly followed the relevant part in this link:<br />https://wiki.archlinux.org/index.php/VirtualBox<br /><div><br /></div><div>On guest, install the VirtualBox Guest Additions:<br /><br /></div><div><code><span style="color: blue;">pacman -S virtualbox-guest-utils</span></code></div><div><br /></div><div>Manually load the modules with:<br /><br /></div><div><code><span style="color: blue;">modprobe -a vboxguest vboxsf vboxvideo</span></code></div><div><br />Add the new modules to this file:</div><div><code><br /></code></div><div><code><span style="color: blue;">vi /etc/modules-load.d/virtualbox.conf</span></code><br /><code><span style="color: blue;"><br /></span></code></div><div><code><span style="color: blue;">vboxguest</span></code><br /><code><span style="color: blue;">vboxsf</span></code><br /><code><span style="color: blue;">vboxvideo</span></code><br /><code><br /></code>Start the sharing services:<br /><br /><code><span style="color: blue;">VBoxClient-all &amp;</span></code><br /><code><br /></code></div>or do the following:<br /><code><span style="color: blue;">sudo systemctl enable vboxservice</span></code><br /><code><span style="color: blue;">sudo systemctl start vboxservice</span></code><br /><br />Shared folders are managed via the VirtualBox program on the host. They may be added, auto-mounted and made read-only from there.<br /><br /><img src="webkit-fake-url://4DCB7022-D758-4C4D-827E-2A0D27997890/image.tiff" /><br /><div class="separator" style="clear: both; text-align: center;"><a href="http://2.bp.blogspot.com/-flHFOJujZKo/UogEhFLMRUI/AAAAAAAAAJI/ViBsRbylNDI/s1600/Linux-Clone---Shared-Folders.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="138" src="http://2.bp.blogspot.com/-flHFOJujZKo/UogEhFLMRUI/AAAAAAAAAJI/ViBsRbylNDI/s320/Linux-Clone---Shared-Folders.png" width="320" /></a></div><br /><br />If automounting is enabled, and the vboxservice is enabled, creating a shared folder from the VirtualBox program on the host will mount that folder in <b>/media/sf_SHAREDFOLDERNAME</b> on the guest. To have that folder created on the Arch Guest, after the Guest Additions have been installed, you need to add your username to the vboxsf group.<br /><code><br /></code><code><span style="color: blue;">groupadd vboxsf</span></code><br /><code><span style="color: blue;">gpasswd -a $USER vboxsf</span></code><br /><br />Link the shared folder to your home directory if you want: <code><br /><span style="color: blue;">ln -s /media/sf_Shared/* ~/Shared</span></code><span style="color: blue;">&nbsp;</span><br /><br />There are also suggestions to add entries in /etc/fstab, I didn't do that and it hasn't caused me any trouble.
+For me the guest system is Arch Linux, so I mostly followed the relevant part in this [link](https://wiki.archlinux.org/index.php/VirtualBox)
+
+On guest, install the VirtualBox Guest Additions:
+
+```Bash
+pacman -S virtualbox-guest-utils
+```
+
+Manually load the modules with:
+
+```Bash
+modprobe -a vboxguest vboxsf vboxvideo
+```
+
+Add the new modules to this file:
+
+```Bash
+vi /etc/modules-load.d/virtualbox.conf
+```
+
+> vboxguest
+> vboxsf
+> vboxvideo
+
+Start the sharing services:
+
+```Bash
+VBoxClient-all &
+```
+
+or do the following:
+
+```Bash
+sudo systemctl enable vboxservice
+sudo systemctl start vboxservice
+```
+
+Shared folders are managed via the VirtualBox program on the host. They may be added, auto-mounted and made read-only from there.
+
+![alt text](http://2.bp.blogspot.com/-flHFOJujZKo/UogEhFLMRUI/AAAAAAAAAJI/ViBsRbylNDI/s1600/Linux-Clone---Shared-Folders.png)
+
+
+
+If automounting is enabled, and the vboxservice is enabled, creating a shared folder from the VirtualBox program on the host will mount that folder in /media/sf_SHAREDFOLDERNAME on the guest. To have that folder created on the Arch Guest, after the Guest Additions have been installed, you need to add your username to the vboxsf group.
+
+```Bash
+groupadd vboxsf
+gpasswd -a $USER vboxsf
+```
+
+Link the shared folder to your home directory if you want: 
+
+```Bash
+ln -s /media/sf_Shared/* ~/Shared 
+```
+
+There are also suggestions to add entries in /etc/fstab, I didn't do that and it hasn't caused me any trouble.
