@@ -21,16 +21,16 @@ sudo gem install jekyll-import
 
 Go to the directory where your site clone is stored, run the following:
 
-```ruby
+{% highlight ruby %}
 ruby -rubygems -e 'require "jekyll-import";
 JekyllImport::Importers::Blogger.run({
         "source"                => "/Users/swang/Downloads/blog-12-31-2014.xml",
         "no-blogger-info"       => false,
         "replace-internal-link" => false,
         })'
-```
+{% endhighlight %}
 
-Note the "source" has to be absolute path
+Note the "source" bit has to be absolute path
 
 That's it!
 
