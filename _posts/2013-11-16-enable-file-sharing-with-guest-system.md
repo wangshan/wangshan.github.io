@@ -67,3 +67,4 @@ ln -s /media/sf_Shared/* ~/Shared
 ```
 
 There are also suggestions to add entries in /etc/fstab, I didn't do that and it hasn't caused me any trouble.
+

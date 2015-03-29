@@ -109,3 +109,4 @@ cp /etc/skel/xinitrc ~/.xinitrc
 There must be one exec command not commented in .xinitrc, then add VBoxClient-all & to the first line.
 
 startx works, but without a windows manager it seems impossible to extend xterm to a bigger resolution, even the automatic resize works for the x windows as a whole. There seems no way to have automatic resize in the console. Tried to use gpm for console mouse support, but it's horrible. In the end I decided to install and start sshd, and login to the box via ssh from my mac.
+
