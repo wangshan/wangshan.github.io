@@ -8,24 +8,27 @@ directory are correctly listed.
 
 Assuming your python is installed in directory ~/python/2.7.8
 
+First, I needed to install pip, setuptools and virtualenv
+
 ```
-    PYTHON=~/python/2.7.8/bin/python
+PYTHON=~/python/2.7.8/bin/python
 
-    # install pip and setuptools
-    # note this command will install it to /${ROOT}/python/2.7.8/
-    ${PYTHON} get-pip.py
+${PYTHON} get-pip.py
 
-    # install virtualenv
-    pip install virtualenv
+pip install virtualenv
+```
 
-    # create a virtual environment
-    ~/python/2.7.8/bin/virtualenv ~/python_virtualenv_for_askbot/
+Create a virtual environment
+```
+~/python/2.7.8/bin/virtualenv ~/python_virtualenv_for_askbot/
 
-    alias vpyt=~/python_virtualenv_for_askbot/bin/python
-    alias vpip=~/python_virtualenv_for_askbot/bin/pip
+alias vpyt=~/python_virtualenv_for_askbot/bin/python
+alias vpip=~/python_virtualenv_for_askbot/bin/pip
+```
 
-    # install askbot
-    vpip install askbot
+Now install askbot using pip of the virtualenv:
+```
+vpip install askbot
 ```
 
 Initially I had error installing setuptools_hg because pip can't seem to find
@@ -33,27 +36,27 @@ it, after some googling the root problem is caused by some dependency issue of
 django, the solution is to explicitly install setuptools_hg first:
 
 ```
-    vpip install setuptools_hg
+vpip install setuptools_hg
 ```
 
 ## Install Postgres
 
 I actually already have postgres 9.0.3 installed in ~/, if you don't just follow the postgres website for how to install it. After thtat, you need to install python binding for postgres:
 ```
-    vpip install psycopg2
+vpip install psycopg2
 ```
 
 it will fail if pg_config is not known, if so, just do this:
 
 ```
-    export PATH=$PATH:~/postgresql/9.0.3/bin/
+export PATH=$PATH:~/postgresql/9.0.3/bin/
 ```
 
 to initialise postgres with a working directory /var/pgdata-9.0.3, do this:
 
 ```
-    mkdir /var/pgdata-9.0.3
-    ~/postgresql/9.0.3/bin/initdb -D /var/pgdata-9.0.3
+mkdir /var/pgdata-9.0.3
+~/postgresql/9.0.3/bin/initdb -D /var/pgdata-9.0.3
 ```
 
 Then config postgres by editing __/var/pgdata-9.0.3/postgresql.conf__:
@@ -90,23 +93,24 @@ ALTER ROLE first_user WITH PASSWORD 'passwd'
 ## Configure Askbot
 
 ```
-    mkdir /var/qna_askbot
-    ../bin/askbot-setup
+mkdir /var/qna_askbot
+../bin/askbot-setup
 
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/postgresql/9.0.3/lib/
-    vpyt manage.py collectstatic
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/postgresql/9.0.3/lib/
+vpyt manage.py collectstatic
 
-    # initialize database for askbot
-    vpyt manage.py syncdb
-    vpyt manage.py migrate askbot
-    vpyt manage.py migrate django_authopenid
-    vpyt manage.py runserver `hostname -i`:8999
+# initialize database for askbot
+vpyt manage.py syncdb
+vpyt manage.py migrate askbot
+vpyt manage.py migrate django_authopenid
+vpyt manage.py runserver `hostname -i`:8999
 ```
 
 Then you should be able to test your qna site by connecting via your browser
 ```
 http://127.0.0.1:8999/
 ```
+Of course replace 127.0.0.1 with your own server ip.
 
-According to Askbot, the first user created on the site will be admin
+If everything went well, you should be able to see a q&a site very similar to stackoverflow!
 
