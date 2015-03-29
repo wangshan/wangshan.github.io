@@ -23,6 +23,7 @@ pip install virtualenv
 ```
 
 Create a virtual environment
+
 ```
 ~/python/2.7.8/bin/virtualenv ~/python_virtualenv_for_askbot/
 
@@ -31,6 +32,7 @@ alias vpip=~/python_virtualenv_for_askbot/bin/pip
 ```
 
 Now install askbot using pip of the virtualenv:
+
 ```
 vpip install askbot
 ```
@@ -46,16 +48,19 @@ vpip install setuptools_hg
 ### Install Postgres
 
 I actually already have postgres 9.0.3 installed in ~/, if you don't just follow the postgres website for how to install it. After thtat, you need to install python binding for postgres:
+
 ```
 vpip install psycopg2
 ```
 
 it will fail if pg_config is not known, if so, just do this:
+
 ```
 export PATH=$PATH:~/postgresql/9.0.3/bin/
 ```
 
 to initialise postgres with a working directory /var/pgdata-9.0.3, do this:
+
 ```
 mkdir /var/pgdata-9.0.3
 ~/postgresql/9.0.3/bin/initdb -D /var/pgdata-9.0.3
@@ -74,16 +79,19 @@ listen_address = '*'
 Then edit pg_hba.conf to add permissions, refer to postgres document for details.
 
 ### Start Postgres
+
 ```
 ~/postgresql/9.0.3/bin/pg_ctl -D /var/gpgdata-9.0.3 -l /var/pgdata-9.0.3/server.log start
 ```
 
 Create user and passwd
+
 ```
 ~/postgresql/9.0.3/bin/createuser first_user -E -W
 ```
 
 **NOTE: for some reason this command doesn't set password correctly, I had to run a sql command to reset password for __first_user__ user:**
+
 ```
 ~/postgresql/9.0.3/bin/createdb qna -U first_user
 
@@ -109,6 +117,7 @@ vpyt manage.py runserver `hostname -i`:8999
 ```
 
 Then you should be able to test your qna site by connecting via your browser
+
 ```
 http://127.0.0.1:8999/
 ```
