@@ -1,14 +1,18 @@
-**NOTE: this assumes you can access PyPI using your own user**
+---
+layout: post
+title: How To Set Up Askbot As Your Q&A Site
+---
 
 Askbot is a Django so you'll need python. If you want to build your own python, make sure configure it with ssl support. In my case I tried to build python 2.7.8 with ssl support, configure --with-ssl doesn't work, so I have
 to hack setup.py to include ssl support, just make sure the include and libs
 directory are correctly listed.
 
-## Install Askbot
+### Install Askbot
 
 Assuming your python is installed in directory ~/python/2.7.8
 
-First, I needed to install pip, setuptools and virtualenv
+First, I needed to install pip, setuptools and virtualenv (**NOTE: this assumes you can access PyPI using your own user**)
+
 
 ```
 PYTHON=~/python/2.7.8/bin/python
@@ -39,7 +43,7 @@ django, the solution is to explicitly install setuptools_hg first:
 vpip install setuptools_hg
 ```
 
-## Install Postgres
+### Install Postgres
 
 I actually already have postgres 9.0.3 installed in ~/, if you don't just follow the postgres website for how to install it. After thtat, you need to install python binding for postgres:
 ```
@@ -47,13 +51,11 @@ vpip install psycopg2
 ```
 
 it will fail if pg_config is not known, if so, just do this:
-
 ```
 export PATH=$PATH:~/postgresql/9.0.3/bin/
 ```
 
 to initialise postgres with a working directory /var/pgdata-9.0.3, do this:
-
 ```
 mkdir /var/pgdata-9.0.3
 ~/postgresql/9.0.3/bin/initdb -D /var/pgdata-9.0.3
@@ -71,7 +73,7 @@ listen_address = '*'
 
 Then edit pg_hba.conf to add permissions, refer to postgres document for details.
 
-## Start Postgres
+### Start Postgres
 ```
 ~/postgresql/9.0.3/bin/pg_ctl -D /var/gpgdata-9.0.3 -l /var/pgdata-9.0.3/server.log start
 ```
@@ -90,7 +92,7 @@ Create user and passwd
 ALTER ROLE first_user WITH PASSWORD 'passwd'
 ```
 
-## Configure Askbot
+### Configure Askbot
 
 ```
 mkdir /var/qna_askbot
