@@ -4,11 +4,11 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+I am an experienced software developer with particular interested in distributed high throughput and low latency system. My main specialities is C++ on UNIX/Linux platform. But I also have extensive experience with C, python, JavaScript, shell scripting and R. I'm currently learning Haskell and Rust.
 
-### More Information
+See my Linkedin page for a full bio.
 
-A place to include any other types of information that you'd like to include about yourself. 
+This blog is where I keep things that I think worth noting. Hope you can find something interesting here too.
 
 ### Contact me
 
